@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+</head>
+<body>
+    {% if registered %}
+        Hello {{username}}
+        <hr>
+        <br>
+        your cards
+        {% for card in cards %}
+            <hr>
+            <a href="/card/{{card.id}}/">number : {{card.id}} ; balance : {{card.balance}}</a>
+        {% endfor %}
+        <br>
+        <hr>
+        <br>
+
+        Navigation:
+        <nav>
+            <a href="/card/">create card</a><br>
+            <a href="/del/">del session</a><br>
+            <a href="/delu/">del users</a><br>
+            <a href="/test/">test card</a>
+        </nav>
+
+    {% else %}
+        <a href="/login" >login</a>
+        <a href="/auth">auth</a>
+    {% endif %}
+    
+</body>
+</html>

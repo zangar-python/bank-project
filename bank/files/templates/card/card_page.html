@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/">to main menu</a>
+    Ваш счет {{sum}}
+    Ваш номер карты {{id}}
+    <form action="/card/{{id}}/translate/" method="post">
+        <h3>Переводит на другую карту</h3>
+        {% csrf_token %}
+        <input type="number" placeholder="номер карточки" name="to" >
+        <input type="number" placeholder="сумма" name="balance" >
+        <button type="submit" >Переводит</button>
+    </form>
+    <br>
+    <hr>
+    <br>
+    {% if saving %}
+        накопление:{{saving.sum}} 
+        Ваш счет:{{sum}}
+        <form action="/card/{{id}}/saved/add/" method="post">
+            {% csrf_token %}
+            <input type="number" name="sum" placeholder="Сколько собирать">
+            <button type="submit">Заполнить</button>
+        </form>
+        <form action="/card/{{id}}/save/get/" method="post" >
+            Вывести с сохранение
+            {% csrf_token %}
+            <input type="text" name="get" placeholder="Сумма">
+            <button type="submit" >Получить</button>
+        </form>
+    {% else %}
+        <a href="/card/{{id}}/save/">Создать накопление счета</a>
+    {% endif %}
+    <br>
+    <hr>
+    <br>
+    <form action="/card/{{id}}/add_balance/" method="post">
+        {% csrf_token %}
+        <h3>Пополнит</h3>
+        <button type="submit" >Пополнит</button>
+    </form>
+</body>
+</html>
